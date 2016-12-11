@@ -4,7 +4,8 @@
   "description": "JavaScript object differ.  Great for debugging!",
   "main": "release/jsdifflist.js",
   "scripts": {
-    "build": "babel -s -d dist src"
+    "build": "babel -s -d dist src",
+    "test": "node tests/jsdifflist-tests | ./node_modules/faucet/bin/faucet.cmd"
   },
   "author": "Ethan Brown <ethan.brown@popart.com>",
   "license": "(MIT OR GPL-3)",

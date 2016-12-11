@@ -43,6 +43,7 @@ function diff(comparands, opts) {
     return equalityType(comparands, opts);
 }
 
+
 module.exports = function(a, b, opts = {}) {
     if(typeof opts.numberFormat !== 'function') opts.numberFormat = n => n;
 
