@@ -5,7 +5,7 @@
   "main": "release/jsdifflist.js",
   "scripts": {
     "build": "babel -s -d dist src",
-    "test": "node tests/jsdifflist-tests | ./node_modules/faucet/bin/faucet.cmd"
+    "test": "node tests/jsdifflist-tests | faucet"
   },
   "author": "Ethan Brown <ethan.brown@popart.com>",
   "license": "(MIT OR GPL-3)",
@@ -14,13 +14,13 @@
     "chalk": "^1.1.3",
     "easy-table": "^1.0.0",
     "escape-html": "^1.0.3",
-    "faucet": "^0.0.1",
     "is-equal": "^1.5.3",
     "tape": "^4.6.3"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
+    "faucet": "^0.0.1",
     "source-map-support": "^0.4.6"
   }
 }
