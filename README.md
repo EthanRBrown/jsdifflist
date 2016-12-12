@@ -20,6 +20,7 @@ Now you can!
 
 * Only one level supported (i.e., it will not show diffs in array/object properties)
 * Only two variables can currently be diffed
+* Map/Set diffing not supported
 
 ## Usage
 
