@@ -79,6 +79,7 @@ module.exports = function (a, b) {
     if (typeof opts.numberFormat !== 'function') opts.numberFormat = function (n) {
         return n;
     };
+    if (!opts.labels) opts.labels = ['Object A', 'Object B'];
 
     function formatValue(v) {
         if (v === null) return 'null'; // avoid JavaScript's brain-dead 'typeof' behavior wrt null
@@ -113,8 +114,8 @@ module.exports = function (a, b) {
 
                         t.cell('Property', chalk[_diff.colorHint](_diff.key));
                         t.cell('Equality', _diff.result);
-                        t.cell('Object A', chalk[_diff.colorHint](formatValue(_diff.values[0])));
-                        t.cell('Object B', chalk[_diff.colorHint](formatValue(_diff.values[1])));
+                        t.cell(opts.labels[0], chalk[_diff.colorHint](formatValue(_diff.values[0])));
+                        t.cell(opts.labels[1], chalk[_diff.colorHint](formatValue(_diff.values[1])));
                         t.newRow();
                     }
                 } catch (err) {
@@ -138,7 +139,7 @@ module.exports = function (a, b) {
         toHtml: {
             isEnumerable: false,
             value: function value() {
-                return '<table class="jsdifflist">' + '<thead><tr>' + '<th>Property</th>' + '<th>Equality</th>' + '<th>Object A</th>' + '<th>Object B</th>' + '</tr></thead>' + '<tbody>' + this.map(function (d) {
+                return '<table class="jsdifflist">' + '<thead><tr>' + '<th>Property</th>' + '<th>Equality</th>' + ('<th>' + opts.labels[0] + '</th>') + ('<th>' + opts.labels[1] + '</th>') + '</tr></thead>' + '<tbody>' + this.map(function (d) {
                     return '<tr class="jsdifflist-color-' + d.colorHint + '">' + ('<td>' + escapeHtml(d.key) + '</td>') + ('<td>' + d.result + '</td>') + ('<td>' + escapeHtml(formatValue(d.values[0])) + '</td>') + ('<td>' + escapeHtml(formatValue(d.values[1])) + '</td></tr>');
                 }).join('') + '</tbody></table>';
             }
