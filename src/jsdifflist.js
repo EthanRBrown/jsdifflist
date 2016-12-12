@@ -46,6 +46,7 @@ function diff(comparands, opts) {
 
 module.exports = function(a, b, opts = {}) {
     if(typeof opts.numberFormat !== 'function') opts.numberFormat = n => n;
+    if(!opts.labels) opts.labels = ['Object A', 'Object B'];
 
     function formatValue(v) {
         if(v === null) return 'null'; // avoid JavaScript's brain-dead 'typeof' behavior wrt null
@@ -69,8 +70,8 @@ module.exports = function(a, b, opts = {}) {
                 for(const diff of this) {
                     t.cell('Property', chalk[diff.colorHint](diff.key));
                     t.cell('Equality', diff.result);
-                    t.cell('Object A', chalk[diff.colorHint](formatValue(diff.values[0])));
-                    t.cell('Object B', chalk[diff.colorHint](formatValue(diff.values[1])));
+                    t.cell(opts.labels[0], chalk[diff.colorHint](formatValue(diff.values[0])));
+                    t.cell(opts.labels[1], chalk[diff.colorHint](formatValue(diff.values[1])));
                     t.newRow();
                 }
 
@@ -87,8 +88,8 @@ module.exports = function(a, b, opts = {}) {
                     '<thead><tr>' +
                     '<th>Property</th>' +
                     '<th>Equality</th>' +
-                    '<th>Object A</th>' +
-                    '<th>Object B</th>' +
+                    `<th>${opts.labels[0]}</th>` +
+                    `<th>${opts.labels[1]}</th>` +
                     '</tr></thead>' +
                     '<tbody>' +
                     this.map(d => `<tr class="jsdifflist-color-${d.colorHint}">` +
